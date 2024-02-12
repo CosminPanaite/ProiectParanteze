@@ -1,0 +1,28 @@
+import java.util.List;
+import java.util.Stack;
+
+public class BalancingParenthesis {
+	public static boolean areParenthesisBalanced(List<Character> listOfChars) {
+		// if the list doesn't contain any parenthesis then the expression is unbalanced
+		if (!listOfChars.contains(')') && !listOfChars.contains('(')) {
+			return false;
+		}
+		Stack<Character> stackOfChars = new Stack<>();
+		for (Character character : listOfChars) {
+			if (character.equals('(')) {
+				stackOfChars.push(character);
+			} else if (character.equals(')')) {
+				if (stackOfChars.isEmpty() || !stackOfChars.pop().equals('(')) {
+					return false;
+				}
+			}
+		}
+		return stackOfChars.isEmpty();
+	}
+
+	public static void main(String[] args) {
+		System.out.println(areParenthesisBalanced(List.of('A', 'B', ')', '(', ')')));
+		System.out.println(areParenthesisBalanced(List.of('A', 'B', '(', ')')));
+
+	}
+}
